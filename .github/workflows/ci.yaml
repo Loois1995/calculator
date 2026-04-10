@@ -33,13 +33,20 @@ jobs:
           docker version
 
       - name: build
-        run: echo 'step build'
+        run: |
+          echo 'step build'
+          mvn clean package -DskipTests
+          docker build -t lion78at/calculator --no-cache .
         
       - name: test
-        run: echo 'step test'
+        run: |
+          echo 'step test'
+          mvn test -P run-integration-tests
 
       - name: release
-        run: echo 'step release'
+        run: |
+          echo 'step release'
+          docker push lion78at/calculator
 
       - name: deploy
         run: echo 'step deploy'
