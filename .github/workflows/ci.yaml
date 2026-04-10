@@ -36,7 +36,7 @@ jobs:
         run: |
           echo 'step build'
           mvn clean package -DskipTests
-          docker build -t lion78at/calculator --no-cache .
+          
         
       - name: test
         run: |
@@ -46,6 +46,7 @@ jobs:
       - name: release
         run: |
           echo 'step release'
+          docker build -t lion78at/calculator --no-cache .
           echo "dckr_pat_l_gkfMe8gjOgcWxl9H6J_TKLoI8" | docker login 	-u lion78at --password-stdin
           docker push lion78at/calculator
 
