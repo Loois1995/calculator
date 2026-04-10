@@ -15,7 +15,9 @@ jobs:
           java-version: 21
           distribution: temurin
           cache: maven
-      
+      - uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.14
       
 
       
