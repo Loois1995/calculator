@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator
+  labels:
+    app: calculator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calculator
+  template:
+    metadata:
+      name: calculator
+      labels:
+        app: calculator
+    spec:
+      containers:
+        - name: calculator
+          image: ghcr.io/Loois1995/calculator
+          imagePullPolicy: Always
+          ports:
+            - name: calculator
+              containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calculator
+  labels:
+    app: calculator
+spec:
+  selector:
+    app: calculator
+  ports:
+    - name: calculator
+      nodePort: 30000
+      port: 8080
+      targetPort: calculator
+  type: NodePort
