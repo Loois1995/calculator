@@ -20,19 +20,22 @@ spec:
           image: lion78at/calculator
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
-              protocol: TCP
+            - name: calculator
+              containerPort: 8080
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: calculator
+  labels:
+    app: calculator
 spec:
   selector:
     app: calculator
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
+    - name: calculator
+      nodePort: 30000
+      port: 8080
+      targetPort: calculator
   type: NodePort
