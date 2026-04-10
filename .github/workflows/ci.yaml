@@ -12,8 +12,8 @@ jobs:
           echo 'step init'
           pwd && ls
           env
-          echo &{{ secrets.DOCKERHUB_TOKEN }}
-          echo &{{ env.RUN_TESTS }}
+          echo ${{ secrets.DOCKERHUB_TOKEN }}
+          echo ${{ env.RUN_TESTS }}
           java --version
           mvn -v
           docker version
