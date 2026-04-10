@@ -53,6 +53,22 @@ jobs:
         run: |
           echo 'step test'
           mvn test -P run-integration-tests
+          
+      - if: env.RUN_TESTS == 'true'
+        uses: dorny/test-reporter@v3
+        with:
+          name: JUnit Tests Report
+          reporter: java-junit
+          path: target/surefire-reports/*.xml
+          fail-on-error: false
+
+      - if: env.RUN_TESTS == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: JaCoCo Coverage Report
+          path: target/site/jacoco/
+          
+          
 
       - name: release
         run: |
